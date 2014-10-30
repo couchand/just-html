@@ -7,7 +7,8 @@ module.exports =
   html: tag 'html'
   head: tag 'head'
   body: tag 'body'
-  link: tag 'link'
+  title: tag 'title'
+  link: tag 'link', omitClosingTag = yes
   script: tag 'script'
   h1: tag 'h1'
   h2: tag 'h2'
@@ -18,4 +19,4 @@ module.exports =
   div: tag 'div'
   span: tag 'span'
   a: tag 'a'
-  img: tag 'img'
+  img: tag 'img', omitClosingTag

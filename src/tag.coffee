@@ -1,7 +1,7 @@
 # html tag
 
 class Tag
-  constructor: (@name, @attributes, @children) ->
+  constructor: (@name, @omitClosingTag, @attributes, @children) ->
 
   hasAttributes: ->
     @attributes and
@@ -28,13 +28,15 @@ class Tag
     else
       (child.toString() for child in @children).join ''
 
-    "<#{@name}#{attrs}>#{content}</#{@name}>"
+    close = if @omitClosingTag and content is '' then '' else "</#{@name}>"
 
-tag = (name) ->
+    "<#{@name}#{attrs}>#{content}#{close}"
+
+tag = (name, omitClosingTag=no) ->
   name = name.toLowerCase()
 
   t = (attributes, children...) ->
-    new Tag name, attributes, children
+    new Tag name, omitClosingTag, attributes, children
 
   t["is#{name[0].toUpperCase()}#{name[1...]}"] = (thing) ->
     thing instanceof Tag and thing.name is name
